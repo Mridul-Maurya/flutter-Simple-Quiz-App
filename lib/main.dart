@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
+import './result.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,32 +15,61 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final questions = const [
+  final _questions = const [
     {
       'questionText': 'What\'s is your fevorite color?',
-      'answers': ['Black', 'Red', 'Green', 'White']
+      'answers': [
+        {'text': 'Black', 'score': 10},
+        {'text': 'Red', 'score': 5},
+        {'text': 'Green', 'score': 3},
+        {'text': 'white', 'score': 1}
+      ]
     },
     {
       'questionText': 'What\'s is your fevorite Animal?',
-      'answers': ['Horese', 'Cat', 'Dog', 'Loin']
+      'answers': [
+        {'text': 'Rabbit', 'score': 10},
+        {'text': 'Dog', 'score': 5},
+        {'text': 'Cat', 'score': 3},
+        {'text': 'Cow', 'score': 1}
+      ]
     },
     {
       'questionText': 'What\'s is your fevorite bird?',
-      'answers': ['Peekock', 'Parrot', 'Sparrow', 'Kingfisher']
+      'answers': [
+        {'text': 'Parrot', 'score': 10},
+        {'text': 'Kingfisher', 'score': 5},
+        {'text': 'Pecok', 'score': 3},
+        {'text': 'Sparrow', 'score': 1}
+      ]
     },
     {
       'questionText': 'What\'s is your fevorite fruit?',
-      'answers': ['Mango', 'Apple', 'Banana', 'Grapes']
+      'answers': [
+        {'text': 'Apple', 'score': 10},
+        {'text': 'Mango', 'score': 5},
+        {'text': 'Grapes', 'score': 3},
+        {'text': 'Banana', 'score': 1}
+      ]
     },
   ];
 
   var _questionIndex = 0;
+  var _totalScore = 0;
 
-  void _answerQuestion() {
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
+
+  void _answerQuestion(int score) {
+    _totalScore += score;
     setState(() {
       _questionIndex++;
     });
-    if (_questionIndex < questions.length) {
+    if (_questionIndex < _questions.length) {
       print('we have more question');
     } else {
       print('question khatm');
@@ -56,19 +84,13 @@ class _MyAppState extends State<MyApp> {
           backgroundColor: Colors.green,
           title: Text('My Quiz App'),
         ),
-        body: _questionIndex < questions.length
-            ? Column(
-                children: [
-                  Question(questions[_questionIndex]['questionText']),
-                  ...(questions[_questionIndex]['answers'] as List<String>)
-                      .map((answer) {
-                    return Answer(_answerQuestion, answer);
-                  }).toList()
-                ],
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
+                questions: _questions,
               )
-            : Center(
-                child: Text('You did it'),
-              ),
+            : Result(_totalScore, _resetQuiz),
       ),
     );
   }
