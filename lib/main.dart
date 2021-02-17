@@ -7,6 +7,7 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -15,41 +16,42 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  
   final _questions = const [
     {
-      'questionText': 'What\'s is your fevorite color?',
+      'questionText': 'What\'s the capital of Uttar Pradesh?',
       'answers': [
-        {'text': 'Black', 'score': 10},
-        {'text': 'Red', 'score': 5},
-        {'text': 'Green', 'score': 3},
-        {'text': 'white', 'score': 1}
+        {'text': 'Shimla', 'score': 0},
+        {'text': 'Kanpur', 'score': 0},
+        {'text': 'Lucknow', 'score': 5},
+        {'text': 'Varansi', 'score': 0}
       ]
     },
     {
-      'questionText': 'What\'s is your fevorite Animal?',
+      'questionText': 'What\'s the capital of Rajsthan?',
       'answers': [
-        {'text': 'Rabbit', 'score': 10},
-        {'text': 'Dog', 'score': 5},
-        {'text': 'Cat', 'score': 3},
-        {'text': 'Cow', 'score': 1}
+        {'text': 'Jaipur', 'score': 5},
+        {'text': 'Udaypur', 'score': 0},
+        {'text': 'Kota', 'score': 0},
+        {'text': 'Jodhpur', 'score': 0}
       ]
     },
     {
-      'questionText': 'What\'s is your fevorite bird?',
+      'questionText': 'What\'s the capital of Madhya Pradesh?',
       'answers': [
-        {'text': 'Parrot', 'score': 10},
-        {'text': 'Kingfisher', 'score': 5},
-        {'text': 'Pecok', 'score': 3},
-        {'text': 'Sparrow', 'score': 1}
+        {'text': 'Indaur', 'score': 0},
+        {'text': 'Ujjain', 'score': 0},
+        {'text': 'Nashik', 'score': 0},
+        {'text': 'Bhopal', 'score': 5}
       ]
     },
     {
-      'questionText': 'What\'s is your fevorite fruit?',
+      'questionText': 'What\'s the capital of Maharastra ?',
       'answers': [
-        {'text': 'Apple', 'score': 10},
-        {'text': 'Mango', 'score': 5},
-        {'text': 'Grapes', 'score': 3},
-        {'text': 'Banana', 'score': 1}
+        {'text': 'Indaur', 'score': 0},
+        {'text': 'Mumbai', 'score': 5},
+        {'text': 'Surat', 'score': 0},
+        {'text': 'Pune', 'score': 0}
       ]
     },
   ];
@@ -79,6 +81,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext contaxt) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green,
@@ -90,7 +93,7 @@ class _MyAppState extends State<MyApp> {
                 questionIndex: _questionIndex,
                 questions: _questions,
               )
-            : Result(_totalScore, _resetQuiz),
+            : Result(_totalScore.toString(), _resetQuiz),
       ),
     );
   }

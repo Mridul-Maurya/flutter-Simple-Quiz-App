@@ -15,13 +15,16 @@ class Quiz extends StatelessWidget {
       @required this.answerQuestion});
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Question(questions[questionIndex]['questionText']),
-        ...(questions[questionIndex]['answers'] as List<Map<String, Object>>).map((answer) {
-          return Answer(() => answerQuestion(answer['score']), answer['text']);
-        }).toList()
-      ],
+    return Container(
+      padding: EdgeInsets.all(20),
+      child: ListView(
+        children: [
+          Question(questions[questionIndex]['questionText']),
+          ...(questions[questionIndex]['answers'] as List<Map<String, Object>>).map((answer) {
+            return Answer(() => answerQuestion(answer['score']), answer['text']);
+          }).toList()
+        ],
+      ),
     );
   }
 }
